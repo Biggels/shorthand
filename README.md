@@ -1,2 +1,5 @@
 # shorthand
 i18n style shorthand
+
+# idea
+start with an english word list, one of the xofydict lists. turn every word into an i18n style shortened version - the first letter, a number, the last letter, with the number equalling the number of letters in between. then review the overlaps (words that have the same length and same starting and ending letters). try starting the shorthand at different word lengths to see how much overlap there is. you could start with words as short as 3 letters, but that isn't actually shorter, and would produce a lot of overlap words. try a threshold length of 3, 4, 5, etc. once i've got a threshold i'm happy with, then review the actual overlaps and break the ties, if you will. maybe come up with a programmatic way to do that, by progressively "revealing" letters until there are no more ties....oh i'm talking about tries, aren't i. because we're matching prefixes. anyway, the end goal being to produce a dictionary that i could print out to use as a reference when writing.
