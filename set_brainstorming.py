@@ -13,4 +13,4 @@ with open("word_lists/oxford_3000.txt", "r") as file:
         WORDS_BY_STARTS_WITH.setdefault(starts_with, set()).add(word)
         WORDS_BY_ENDS_WITH.setdefault(ends_with, set()).add(word)
 
-print(WORDS_BY_LENGTH[5] & WORDS_BY_STARTS_WITH["b"] & WORDS_BY_ENDS_WITH["e"])
+print(WORDS_BY_LENGTH[7] & WORDS_BY_STARTS_WITH["b"] & WORDS_BY_ENDS_WITH["e"])
