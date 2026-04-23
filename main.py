@@ -32,12 +32,19 @@ def shorten_set(word_set, reveal_from_left=1, reveal_from_right=1, middle_thresh
         if len(words) == 1:
             result[next(iter(words))] = shorthand
         elif len(words) > 1:
-            # consider checking left and right letters, and choosing the direction with the most unique letters
+            next_reveal_from_left = reveal_from_left
+            next_reveal_from_right = reveal_from_right
+            left_letters = {word[reveal_from_left] for word in words}
+            right_letters = {word[-(reveal_from_right + 1)] for word in words}
+            if len(left_letters) >= len(right_letters):
+                next_reveal_from_left += 1
+            else:
+                next_reveal_from_right += 1
             result.update(
                 shorten_set(
                     word_set=words,
-                    reveal_from_left=reveal_from_left + 1,
-                    reveal_from_right=reveal_from_right,
+                    reveal_from_left=next_reveal_from_left,
+                    reveal_from_right=next_reveal_from_right,
                     middle_threshold=middle_threshold,
                 )
             )
