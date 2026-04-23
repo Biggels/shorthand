@@ -2,7 +2,8 @@ def main():
     # let's start with the oxford 3000, and then maybe do 3of6game or 2of12inf
 
     word_set = {"bicycle", "because", "balance", "breathe", "believe"}
-    print(shorten_set(word_set))
+    result = shorten_set(word_set)
+    print({word: result[word] for word in sorted(result)})
     return
 
 
@@ -14,6 +15,7 @@ def shorten(word, reveal_from_left=1, reveal_from_right=1, middle_threshold=1):
 
 
 def shorten_set(word_set, reveal_from_left=1, reveal_from_right=1, middle_threshold=1):
+    words = sorted(word_set)
     shorthand_map = {
         word: shorten(
             word=word,
@@ -21,16 +23,17 @@ def shorten_set(word_set, reveal_from_left=1, reveal_from_right=1, middle_thresh
             reveal_from_right=reveal_from_right,
             middle_threshold=middle_threshold,
         )
-        for word in word_set
+        for word in words
     }
     subsets = {}
     for word, shorthand in shorthand_map.items():
-        subsets.setdefault(shorthand, set()).add(word)
+        subsets.setdefault(shorthand, []).append(word)
 
     result = {}
-    for shorthand, words in subsets.items():
+    for shorthand in sorted(subsets):
+        words = subsets[shorthand]
         if len(words) == 1:
-            result[next(iter(words))] = shorthand
+            result[words[0]] = shorthand
         elif len(words) > 1:
             next_reveal_from_left = reveal_from_left
             next_reveal_from_right = reveal_from_right
